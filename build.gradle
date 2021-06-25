@@ -31,6 +31,9 @@ dependencies {
 
 	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
 	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
+
+	// mock-server 생성과 테스트를 위한 모듈
+	testImplementation("org.mock-server:mockserver-netty:5.8.1")
 }
 
 test {

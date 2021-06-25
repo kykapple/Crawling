@@ -1,5 +1,6 @@
 package restaurant.service;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import restaurant.list.domain.Restaurant_Info;
@@ -11,12 +12,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class RestaurantServiceTest {
 
-    private RestaurantService restaurantService = new RestaurantService();
+    private RestaurantService restaurantService;
+
+    @BeforeEach
+    public void init() {
+        restaurantService = new RestaurantService();
+    }
 
     @Test
     public void checkRestaurant() {
         // given
-        List<Restaurant_Info> list = restaurantService.setRestaurant();
+        List<Restaurant_Info> list = restaurantService.setRestaurant("https://www.mangoplate.com/search/%EB%8F%99%ED%83%842");
 
         // when
         Restaurant_Info info = list.get(16);

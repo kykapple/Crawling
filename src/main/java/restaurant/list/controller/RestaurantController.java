@@ -13,6 +13,7 @@ import java.util.List;
 public class RestaurantController {
 
     private final RestaurantService restaurantService;
+    private final String URL = "https://www.mangoplate.com/search/%EB%8F%99%ED%83%842";
 
     @Autowired
     public RestaurantController(RestaurantService restaurantService) {
@@ -20,11 +21,9 @@ public class RestaurantController {
     }
 
     @GetMapping("/")
-    public String index(Model model) {
-        List<Restaurant_Info> list = restaurantService.setRestaurant();
+    public String getRestaurant(Model model) {
+        List<Restaurant_Info> list = restaurantService.setRestaurant(URL);
         model.addAttribute("list", list);
-
-        System.out.println(restaurantService.getRestaurant());
 
         return "index";
     }

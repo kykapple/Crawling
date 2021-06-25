@@ -17,10 +17,9 @@ import java.util.stream.Collectors;
 public class RestaurantService {
 
     private final List<Restaurant_Info> list = new ArrayList<>();
-    private final String URL = "https://www.mangoplate.com/search/%EB%8F%99%ED%83%842";
 
-    public List<Restaurant_Info> setRestaurant() {
-        Document document = new RestaurantService().getCrawlingResult();
+    public List<Restaurant_Info> setRestaurant(String url) {
+        Document document = new RestaurantService().getCrawlingResult(url);
         Elements contents = document.select("figure.restaurant-item");
 
         for (Element content : contents) {
@@ -51,9 +50,9 @@ public class RestaurantService {
                 .collect(Collectors.joining(", \n"));
     }
 
-    public Document getCrawlingResult() {
+    public Document getCrawlingResult(String url) {
         try {
-            return Jsoup.connect(URL).get();
+            return Jsoup.connect(url).get();
         } catch(IOException e) {
             throw new RuntimeException("Crawling failed");
         }
