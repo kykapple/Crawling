@@ -6,11 +6,10 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import restaurant.list.domain.Restaurant_Info;
+import restaurant.list.dto.Restaurant_Info;
 import restaurant.list.repository.RestaurantRepository;
 
 import java.io.IOException;
-import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;

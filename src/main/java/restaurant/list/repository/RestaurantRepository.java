@@ -1,7 +1,7 @@
 package restaurant.list.repository;
 
 import org.springframework.stereotype.Repository;
-import restaurant.list.domain.Restaurant_Info;
+import restaurant.list.dto.Restaurant_Info;
 
 @Repository
 public class RestaurantRepository {     // H2 DB 사용

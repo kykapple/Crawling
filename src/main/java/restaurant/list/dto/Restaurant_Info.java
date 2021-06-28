@@ -1,4 +1,4 @@
-package restaurant.list.domain;
+package restaurant.list.dto;
 
 import lombok.Builder;
 import lombok.Getter;

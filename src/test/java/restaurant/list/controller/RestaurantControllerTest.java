@@ -6,7 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockserver.client.MockServerClient;
 import org.mockserver.integration.ClientAndServer;
-import restaurant.list.domain.Restaurant_Info;
+import restaurant.list.dto.Restaurant_Info;
 import restaurant.list.service.RestaurantService;
 
 import java.io.IOException;

@@ -2,9 +2,7 @@ package restaurant.list.service;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import restaurant.list.domain.Restaurant_Info;
-import restaurant.list.service.RestaurantService;
+import restaurant.list.dto.Restaurant_Info;
 
 import java.util.List;
 
