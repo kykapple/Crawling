@@ -34,6 +34,16 @@ dependencies {
 
 	// mock-server 생성과 테스트를 위한 모듈
 	testImplementation("org.mock-server:mockserver-netty:5.8.1")
+
+	// jdbc
+	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+
+	// H2 데이터베이스
+	runtimeOnly 'com.h2database:h2'
+
+	// Mybatis, JDBC
+	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.4'
 }
 
 test {

@@ -1,4 +1,4 @@
-package restaurant.controller;
+package restaurant.list.controller;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.AfterEach;
@@ -6,8 +6,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockserver.client.MockServerClient;
 import org.mockserver.integration.ClientAndServer;
-import org.mockserver.model.HttpRequest;
-import org.mockserver.model.HttpResponse;
 import restaurant.list.domain.Restaurant_Info;
 import restaurant.list.service.RestaurantService;
 
@@ -43,7 +41,7 @@ public class RestaurantControllerTest {
         System.out.println("mock server stop");
     }
 
-    // respond에서 withBody에 왜 바이트 스트림 받아와야 하는지 공부하기 -> HTTP body에 바이트 코드가 실리는 건가?
+    // respond에서 withBody에 바이트 스트림 -> HTTP body에 바이트 코드?
     private void createRankingPageServer(String path) {
         byte[] response = readHtmlFile(path);
 

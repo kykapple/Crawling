@@ -1,4 +1,4 @@
-package restaurant.service;
+package restaurant.list.service;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -30,5 +30,6 @@ public class RestaurantServiceTest {
         // then
         assertThat(info.getName()).isEqualTo("조선평양냉면");
         assertThat(list.size()).isEqualTo(20);
+        assertThat(info.getLink()).isEqualTo("https://www.mangoplate.com/restaurants/rR2im5Ed9R2M");
     }
 }
