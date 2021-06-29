@@ -41,12 +41,13 @@ class ListApplicationTests {
 
 	@Test
 	public void insertTest() {
-		RestaurantDTO restaurantDTO = RestaurantDTO.builder()
-													.name("하얀풍차")
-													.type("베이커리")
-													.img("temp.jpg")
-													.link("https://www.mangoplate.com/restaurants/F-koH0__EdyV")
-													.build();
+		RestaurantDTO restaurantDTO =
+				RestaurantDTO.builder()
+						.name("하얀풍차")
+						.type("베이커리")
+						.img("temp.jpg")
+						.link("https://www.mangoplate.com/restaurants/F-koH0__EdyV")
+						.build();
 
 		mybatisRestaurantRepository.insertRestaurant(restaurantDTO);
 		RestaurantDTO result = mybatisRestaurantRepository.getRestaurant(restaurantDTO);
