@@ -1,13 +1,14 @@
 package restaurant.list.repository;
 
-import org.springframework.stereotype.Repository;
-import restaurant.list.dto.Restaurant_Info;
+import restaurant.list.dto.RestaurantDTO;
 
-@Repository
-public class RestaurantRepository {     // H2 DB 사용
+import java.util.List;
 
-    public void saveRestaurant(Restaurant_Info restaurant_info) {
+public interface RestaurantRepository {
 
-    }
-
+    void insertRestaurant(RestaurantDTO restaurantDTO);
+    void insertRestaurantList(List<RestaurantDTO> list);
+    RestaurantDTO getRestaurant(RestaurantDTO restaurantDTO);
+    List<RestaurantDTO> getRestaurantList();
+    void deleteRestaurantList();
 }

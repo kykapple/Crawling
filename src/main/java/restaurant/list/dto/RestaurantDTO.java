@@ -7,7 +7,7 @@ import lombok.ToString;
 @Getter
 @Builder
 @ToString
-public class Restaurant_Info {
+public class RestaurantDTO {
     private String name;    // 식당 이름
     private String type;    // 음식 타입
     private String img;     // 음식 사진

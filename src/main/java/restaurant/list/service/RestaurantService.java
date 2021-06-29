@@ -6,8 +6,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import restaurant.list.dto.Restaurant_Info;
-import restaurant.list.repository.RestaurantRepository;
+import restaurant.list.dto.RestaurantDTO;
+import restaurant.list.repository.MybatisRestaurantRepository;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,15 +17,15 @@ import java.util.stream.Collectors;
 @Service
 public class RestaurantService {
 
-    private RestaurantRepository restaurantRepository;
-    private final List<Restaurant_Info> list = new ArrayList<>();
+    private MybatisRestaurantRepository mybatisRestaurantRepository;
+    private final List<RestaurantDTO> list = new ArrayList<>();
 
     @Autowired
-    public void setRestaurantService(RestaurantRepository restaurantRepository) {
-        this.restaurantRepository = restaurantRepository;
+    public void setRestaurantService(MybatisRestaurantRepository mybatisRestaurantRepository) {
+        this.mybatisRestaurantRepository = mybatisRestaurantRepository;
     }
 
-    public List<Restaurant_Info> setRestaurant(String url) {
+    public void setRestaurantList(String url) {
         Document document = new RestaurantService().getCrawlingResult(url);
         Elements contents = document.select("figure.restaurant-item");
 
@@ -41,7 +41,7 @@ public class RestaurantService {
             String link = restaurantSrc.select("a").attr("href");
 
             list.add(
-                Restaurant_Info.builder()
+                RestaurantDTO.builder()
                         .name(name)
                         .type(type)
                         .img(img)
@@ -50,13 +50,7 @@ public class RestaurantService {
             );
         }
 
-        return list;
-    }
-
-    public String getRestaurant() {
-        return list.stream()
-                .map(Restaurant_Info::toString)
-                .collect(Collectors.joining(", \n"));
+        mybatisRestaurantRepository.insertRestaurantList(list);
     }
 
     public Document getCrawlingResult(String url) {
@@ -67,4 +61,17 @@ public class RestaurantService {
         }
     }
 
+    public List<RestaurantDTO> getRestaurantList() {
+        return mybatisRestaurantRepository.getRestaurantList();
+    }
+
+    public void deleteRestaurantList() {
+        mybatisRestaurantRepository.deleteRestaurantList();
+    }
+
+    public String getRestaurant() {
+        return list.stream()
+                .map(RestaurantDTO::toString)
+                .collect(Collectors.joining(", \n"));
+    }
 }
