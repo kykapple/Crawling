@@ -6,33 +6,41 @@
 
   <link rel="stylesheet" href="http://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-  <script type="text/javascript" src="/js/index.js"></script>
 </head>
 <body>
 
 <div class = "container">
 
-  <h1 class="display-4">맛집 찾아</h1>
+  <h1 class="display-4" th:text="${location}"></h1>
   <p class="lead">
     <span>
       맛집 리스트
     </span>
-    <button type="button" id="ssssss" class="btn btn-primary">다시 검색</button>
+    <form action="/reset">
+      <input type="submit" value="다시 검색" class="btn btn-primary">
+    </form>
   </p>
 
   <table class= "table">
-    <tr th:each = "restaurant : ${list} ">
+    <tr th:each="restaurant : ${list} ">
       <td>
-        <img th:src = "${restaurant.img}" width="300px" height="200px"/>
+        <img th:src="${restaurant.img}" width="300px" height="200px"/>
       </td>
       <td>
         <p th:text="${restaurant.name}"></p>
         <button type="button" th:onclick="'location.href=\'' + @{${restaurant.link}} + '\''" class="btn btn-primary">이동하기</button>
       </td>
-      <td th:text = "${restaurant.type}"></td>
+      <td th:text="${restaurant.type}"></td>
     </tr>
   </table>
+
 </div>
+
+  <ul class="pagination justify-content-center">
+    <li th:each="pageNum : ${#numbers.sequence(pageMaker.startPage, pageMaker.endPage)}">
+      <a th:class="page-link" th:href="@{/where?(page=${pageNum})}" th:text="${pageNum}"></a>
+    </li>
+  </ul>
+
 </body>
 </html>

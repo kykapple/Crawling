@@ -8,7 +8,7 @@
             CREATE TABLE RESTAURANTS (
                 NAME VARCHAR(50) NOT NULL,
                 TYPE VARCHAR(30) NOT NULL,
-                IMG VARCHAR(255) NOT NULL,
+                IMG MEDIUMTEXT NOT NULL,
                 LINK VARCHAR(100) NOT NULL
             )
         ]]>
@@ -27,13 +27,19 @@
         ]]>
     </select>
 
-    <select id="selectAll" resultType="restaurant.list.dto.RestaurantDTO">
+    <select id="selectList" resultType="restaurant.list.dto.RestaurantDTO" parameterType="restaurant.list.dto.PageDTO">
         <![CDATA[
-            SELECT * FROM RESTAURANTS
+            SELECT * FROM RESTAURANTS LIMIT #{pageStart}, #{perPageCnt}
         ]]>
     </select>
 
-    <delete id="deleteAll">
+    <select id="getListCnt" resultType="Integer">
+        <![CDATA[
+            SELECT COUNT(*) FROM RESTAURANTS
+        ]]>
+    </select>
+
+    <delete id="deleteList">
         <![CDATA[
             DELETE FROM RESTAURANTS
         ]]>
