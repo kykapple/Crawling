@@ -3,6 +3,7 @@ package restaurant.list.repository;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import restaurant.list.dto.PageDTO;
 import restaurant.list.dto.RestaurantDTO;
 
 import javax.annotation.PostConstruct;
@@ -37,11 +38,15 @@ public class MybatisRestaurantRepository implements RestaurantRepository {     /
         return sqlSessionTemplate.selectOne("RestaurantDTO.select", restaurantDTO);
     }
 
-    public List<RestaurantDTO> getRestaurantList() {
-        return sqlSessionTemplate.selectList("RestaurantDTO.selectAll");
+    public List<RestaurantDTO> getRestaurantList(PageDTO pageDTO) {
+        return sqlSessionTemplate.selectList("RestaurantDTO.selectList", pageDTO);
+    }
+
+    public int getRestaurantListCnt() {
+        return sqlSessionTemplate.selectOne("RestaurantDTO.getListCnt");
     }
 
     public void deleteRestaurantList() {
-        sqlSessionTemplate.delete("RestaurantDTO.deleteAll");
+        sqlSessionTemplate.delete("RestaurantDTO.deleteList");
     }
 }
