@@ -7,6 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 import restaurant.list.dto.RestaurantDTO;
 import restaurant.list.repository.MybatisRestaurantRepository;
+import restaurant.list.repository.RestaurantRepository;
+import restaurant.list.service.RestaurantService;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -18,7 +20,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 class ListApplicationTests {
 
 	@Autowired
-	private MybatisRestaurantRepository mybatisRestaurantRepository;
+	private RestaurantService restaurantService;
+	@Autowired
+	private RestaurantRepository restaurantRepository;
 
 	@Autowired
 	private DataSource dataSource;
@@ -49,11 +53,19 @@ class ListApplicationTests {
 						.link("https://www.mangoplate.com/restaurants/F-koH0__EdyV")
 						.build();
 
-		mybatisRestaurantRepository.insertRestaurant(restaurantDTO);
-		RestaurantDTO result = mybatisRestaurantRepository.getRestaurant(restaurantDTO);
+		restaurantRepository.insertRestaurant(restaurantDTO);
+		RestaurantDTO result = restaurantRepository.getRestaurant(restaurantDTO);
 
 		assertThat(result).isInstanceOf(RestaurantDTO.class);
 		assertThat(result.getName()).isEqualTo(restaurantDTO.getName());
+	}
+
+	@Test
+	public void getCntTest() {
+		restaurantService.setRestaurantList("https://www.mangoplate.com/search/", "영등포");
+		int cnt = restaurantService.getRestaurantListCnt();
+
+		assertThat(cnt).isEqualTo(200);
 	}
 
 }
