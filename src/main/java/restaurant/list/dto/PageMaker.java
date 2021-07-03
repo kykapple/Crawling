@@ -37,7 +37,8 @@ public class PageMaker {
             startPage = endPage - displayPageCnt + 1;
         }
 
-
+        prev = startPage == 1 ? false : true;
+        next = endPage < range ? true : false;
     }
 
     public int getStartPage() {

@@ -24,9 +24,21 @@ public class RestaurantController {
     }
 
     @GetMapping("/where")
-    public String showRestaurants(@RequestParam("location") String location, PageDTO pageDTO, Model model) {
-//        restaurantService.deleteRestaurantList();
+    public String showRestaurants(@RequestParam(name = "location", required = false) String location, PageDTO pageDTO, Model model) {
         restaurantService.setRestaurantList("https://www.mangoplate.com/search/", location);
+
+        PageMaker pageMaker = new PageMaker();
+        pageMaker.setPageDTO(pageDTO);
+        pageMaker.setTotalCnt(restaurantService.getRestaurantListCnt());
+
+        model.addAttribute("list", restaurantService.getRestaurantList(pageDTO));
+        model.addAttribute("location", location);
+        model.addAttribute("pageMaker", pageMaker);
+        return "list";
+    }
+
+    @GetMapping("/restaurants")
+    public String getRestaurantList(@RequestParam("location") String location, PageDTO pageDTO, Model model) {
 
         PageMaker pageMaker = new PageMaker();
         pageMaker.setPageDTO(pageDTO);
@@ -41,6 +53,7 @@ public class RestaurantController {
 
     @GetMapping("/reset")
     public String reset() {
+        restaurantService.deleteRestaurantList();
         return "index";
     }
 }

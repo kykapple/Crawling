@@ -36,9 +36,16 @@
 
 </div>
 
+
   <ul class="pagination justify-content-center">
+    <li th:if="${pageMaker.prev}">
+      <a th:class="page-link" th:href="@{/restaurants?(location=${location}, page=${pageMaker.startPage-1})}" th:text="prev"></a>
+    </li>
     <li th:each="pageNum : ${#numbers.sequence(pageMaker.startPage, pageMaker.endPage)}">
-      <a th:class="page-link" th:href="@{/where?(page=${pageNum})}" th:text="${pageNum}"></a>
+      <a th:class="page-link" th:href="@{/restaurants?(location=${location}, page=${pageNum})}" th:text="${pageNum}"></a>
+    </li>
+    <li th:if="${pageMaker.next}">
+      <a th:class="page-link" th:href="@{/restaurants?(location=${location}, page=${pageMaker.endPage+1})}" th:text="next"></a>
     </li>
   </ul>
 
